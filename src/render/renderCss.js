@@ -85,7 +85,8 @@ export default class RenderCss {
     })
   }
 
-  swap (i, j, flag) {
+  swap ({ step, flag }) {
+    let [i, j] = step
     this.items.forEach(item => {
       item.style.backgroundColor = this.style.itemStyle.backgroundColor
       item.style.zIndex = 1

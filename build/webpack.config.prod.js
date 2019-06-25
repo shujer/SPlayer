@@ -1,5 +1,4 @@
 const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
 
 module.exports = {
@@ -20,13 +19,6 @@ module.exports = {
     publicPath: '/'
   },
 
-  // plugins: [
-  //   new HtmlWebpackPlugin({
-  //     filename: 'bubble.html',
-  //     template: path.resolve(__dirname, '..', 'example/bubble.html'),
-  //   })
-  // ],
-
   module: {
     rules: [
       {
@@ -40,12 +32,6 @@ module.exports = {
   resolve: {
     modules: ['node_modules'],
     extensions: ['.js']
-  },
-
-  devServer: {
-    compress: true,
-    contentBase: path.resolve(__dirname, '..', 'example'),
-    open: true,
   },
   node: {
     dgram: 'empty',

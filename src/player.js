@@ -69,7 +69,7 @@ export default class SPlayer {
         return
       }
       this.oldstack.push(step)
-      this.RenderUtils.swap(...step)
+      this.RenderUtils.swap(step)
       if (step) {
         this.timer = setTimeout(() => {
           this.start()
