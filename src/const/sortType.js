@@ -1,6 +1,7 @@
 const sortTypes = [
     'bubble',
-    'quick'
+    'quick',
+    'select'
 ]
 
 export default sortTypes;
