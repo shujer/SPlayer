@@ -12,20 +12,59 @@
             background-color: #333;
             margin: 20px auto;
         }
+
+        #controller {
+            width: 600px;
+            height: 40px;
+            background-color: pink;
+            margin: auto auto;
+            font-size: 0;
+        }
+        #controller button {
+            width: 20%;
+            height: 100%;
+            outline: none;
+            border: none;
+            background-color: lightblue;
+        }
+        #controller button:hover {
+            transform: scale3d(1.05, 1.05, 1);
+        }
     </style>
 </head>
 
 <body>
     <div id="sortPlayer"></div>
+    <div id="controller">
+        <button class="startButton">Start</button>
+        <button class="stopButton">Stop</button>
+        <button class="stepButton">Step</button>
+        <button class="undoButton">Undo</button>
+        <button class="resetButton">Reset</button>
+    </div>
+
     <script type="text/javascript" src="/SPlayer.js"></script>
     <script type="text/javascript">
         const sp = new SPlayer( {
             el: document.querySelector( '#sortPlayer' ),
-            data: [9, 10, 15, 4, 13, 2],
+            data: [9, 8, 11, 3],
             sortType: 'quick',
-            delay: 3000,//ms
+            delay: 2000,//ms
             renderer: 'css'
         } )
+        document.querySelector( '#controller' ).addEventListener( 'click', function ( e ) {
+            if ( e.target.tagName === 'BUTTON' ) {
+                let type = e.target.className;
+                switch ( type ) {
+                    case 'startButton': sp.start(); break;
+                    case 'stopButton': sp.stop(); break;
+                    case 'stepButton': sp.step(); break;
+                    case 'undoButton': sp.undo(); break;
+                    case 'resetButton': sp.reset(); break;
+                    default: break;
+                }
+            }
+        }, false )
     </script>
 </body>
 

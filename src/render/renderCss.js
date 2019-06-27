@@ -64,6 +64,7 @@ export default class RenderCss {
       dom.appendChild(item)
       count++
     }
+    this.el.innerHTML = "";
     this.el.appendChild(dom)
     this.el.style.position = 'relative'
     this.items = [...this.el.children]

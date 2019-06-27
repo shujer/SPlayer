@@ -57,20 +57,14 @@ export default class SPlayer {
   _init () {
     this.RenderUtils.initialize()
     this.stack = algorithmn[this.sortType]([...this.data])
-    this.start()
   }
 
   // step in every duration
   start () {
     clearTimeout(this.timer)
     this.timer = setTimeout(() => {
-      let step = this.stack.shift()
-      if (!step) {
-        return
-      }
-      this.oldstack.push(step)
-      this.RenderUtils.swap(step)
-      if (step) {
+      let hasNext = this.step()
+      if (hasNext) {
         this.timer = setTimeout(() => {
           this.start()
         }, this.duration)
@@ -78,13 +72,37 @@ export default class SPlayer {
     }, this.duration)
   }
 
+  reset () {
+    clearTimeout(this.timer)
+    while (this.oldstack.length) {
+      this.stack.unshift(this.oldstack.pop())
+    }
+    this.RenderUtils.initialize()
+  }
+
   stop () {
     clearTimeout(this.timer)
   }
 
   // change view step by step
-  step () {}
+  step () {
+    let step = this.stack.shift()
+    if (!step) {
+      return false
+    }
+    this.oldstack.push(step)
+    this.RenderUtils.swap(step)
+    return true
+  }
 
   // cancel last step
-  undo () {}
+  undo () {
+    let step = this.oldstack.pop()
+    if (!step) {
+      return false
+    }
+    this.stack.unshift(step)
+    this.RenderUtils.swap(step)
+    return true
+  }
 }
