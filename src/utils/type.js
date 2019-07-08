@@ -1,10 +1,23 @@
-const checkType = {
-  function: function (fn) {
-    return fn && Object.prototype.toString.call(fn) === '[object Function]'
-  },
-  array: function (arr) {
-    return arr && Object.prototype.toString.call(arr) === '[object Array]'
+const types = [
+  'Function',
+  'Array',
+  'Object',
+  'Boolean',
+  'String',
+  'Null',
+  'Undefined',
+  'Number',
+  'Symbol'
+]
+
+function isType (type) {
+  return function (obj) {
+    return Object.prototype.toString.call(obj).includes(type)
   }
 }
 
-export default checkType;
+let checkType = {}
+
+types.forEach(type => (checkType['is' + type] = isType(type)))
+
+export default checkType

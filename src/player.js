@@ -23,14 +23,14 @@ export default class SPlayer {
   }) {
     if (
       !el ||
-      !checkType['array'](data) ||
-      (!sortTypes.includes(sortType) && !checkType['function'](customSort))
+      !checkType.isArray(data) ||
+      (!sortTypes.includes(sortType) && !checkType.isFunction(customSort))
     ) {
       throw Error('param missing')
     }
     this.el = el
     this.data = [...data]
-    this.sortType = checkType['function'](customSort)
+    this.sortType = checkType.isFunction(customSort)
       ? 'custom'
       : sortType || 'bubble'
     this.duration = duration
